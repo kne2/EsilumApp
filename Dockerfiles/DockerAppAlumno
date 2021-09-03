@@ -1,0 +1,15 @@
+FROM php:7.4-apache 
+RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
+
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y git
+
+COPY AppAlumno/. /var/www/html/
+RUN rm -rf /var/www/html/EsilumBackEnd
+RUN git clone https://github.com/kne2/EsilumBackEnd /var/www/html/EsilumBackEnd
+
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+RUN a2enmod rewrite
