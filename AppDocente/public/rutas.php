@@ -21,15 +21,13 @@
         
         case "/registro":
             if($_SERVER['REQUEST_METHOD'] === 'GET') UserController::MostrarRegistro(); 
-            if($_SERVER['REQUEST_METHOD'] === 'POST') UserController::AltaDeUsuario(str_replace('.', '', str_replace('-', '', $_POST['registerID'])),$_POST['registerNombre'],$_POST['registerApellido'],$_POST['registerEmail'],$_POST['registerPassword1'],$_POST['registerPassword2'],$_POST['registerTipodeusuario']);
+            if($_SERVER['REQUEST_METHOD'] === 'POST') UserController::AltaDeUsuario(str_replace('.', '', str_replace('-', '', $_POST['registerID'])),$_POST['registerNombre'],$_POST['registerApellido'],$_POST['registerEmail'],$_POST['registerPassword1'],$_POST['registerPassword2'],APP);
             break;
 
         case '/verconsultas':
             ConsultaController::ObtenerConsultas();
             break;
-        case "/test":
-            if($_SERVER['REQUEST_METHOD'] === 'POST') error_log($_POST['test']);
-            break;
+
         case '/cerrarsesion':
             UserController::cerrarSesion();
             break;
@@ -41,11 +39,6 @@
         case '/editarperfil':
             if($_SERVER['REQUEST_METHOD'] === 'GET') UserController::MostrarEditarPerfil(); 
             if($_SERVER['REQUEST_METHOD'] === 'POST') UserController::EditarUser($_SESSION['usuarioId'],$_POST['profileNombre'],$_POST['profileApellido'],$_POST['profilePassword1'],$_POST['profilePassword2'],$_POST['profileEmail'],$_POST['profileAvatar']);
-            break;
-        
-        case '/realizarconsulta':
-            if($_SERVER['REQUEST_METHOD'] === 'GET') UserController::MostrarRealizarConsulta(); 
-            if($_SERVER['REQUEST_METHOD'] === 'POST') ConsultaController::NuevaConsulta($_POST['consultaTitulo'],$_POST['consultaDescripcion']);
             break;
         
         default:
