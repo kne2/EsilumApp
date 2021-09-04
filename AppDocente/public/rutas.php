@@ -21,7 +21,7 @@
         
         case "/registro":
             if($_SERVER['REQUEST_METHOD'] === 'GET') UserController::MostrarRegistro(); 
-            if($_SERVER['REQUEST_METHOD'] === 'POST') UserController::AltaDeUsuario(str_replace('.', '', str_replace('-', '', $_POST['registerID'])),$_POST['registerNombre'],$_POST['registerApellido'],$_POST['registerEmail'],$_POST['registerPassword1'],$_POST['registerPassword2'],APP);
+            if($_SERVER['REQUEST_METHOD'] === 'POST') UserController::AltaDeUsuario(str_replace('.', '', str_replace('-', '', $_POST['registerID'])),$_POST['registerNombre'],$_POST['registerApellido'],$_POST['registerEmail'],$_POST['registerPassword1'],$_POST['registerPassword2'],APP_USUARIO);
             break;
 
         case '/verconsultas':

@@ -6,6 +6,7 @@ RUN apt-get update && \
     apt-get install -y git
 
 COPY AppAlumno/. /var/www/html/
+ADD "https://github.com/kne2/EsilumBackEnd" skipcache
 RUN rm -rf /var/www/html/EsilumBackEnd
 RUN git clone https://github.com/kne2/EsilumBackEnd /var/www/html/EsilumBackEnd
 
