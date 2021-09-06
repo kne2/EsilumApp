@@ -28,7 +28,10 @@
             ConsultaController::ObtenerConsultas();
             break;
 
-            
+        case '/grupos':
+            UserController::MostrarGrupos();
+            break;
+
         case '/cerrarsesion':
             UserController::cerrarSesion();
             break;
