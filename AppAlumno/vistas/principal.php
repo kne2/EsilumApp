@@ -31,13 +31,14 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="principal"> <i class="fas fa-house-user"></i> <span>Inicio</span></a>
                 </li>
-                <?php if($_SESSION['usuarioTipodeusuario'] == "alumno"): ?>
                 <li class="nav-item active">
                     <a class="nav-link" href="/realizarconsulta"> <i class="fas fa-edit"></i> <span>Realizar consulta</span></a>
                 </li>
-                <?php endif; ?>
                 <li class="nav-item active">
                     <a class="nav-link" href="/verconsultas"> <i class="fas fa-list"></i> <span>Ver consultas</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/grupos"> <i class="fas fa-users"></i> <span>Grupos</span></a>
                 </li>
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
