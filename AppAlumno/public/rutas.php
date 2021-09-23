@@ -29,7 +29,8 @@
             break;
 
         case '/grupos':
-            UserController::MostrarGrupos();
+            if($_SERVER['REQUEST_METHOD'] === 'GET') UserController::MostrarGrupos();
+            if($_SERVER['REQUEST_METHOD'] === 'POST') AlumnoController::AsignarGruposAlumno($_POST);
             break;
 
         case '/cerrarsesion':

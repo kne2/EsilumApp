@@ -1,4 +1,4 @@
-cd \AppAlumno\EsilumBackEnd
+cd AppAlumno\EsilumBackEnd\
 set /p commit= "Ingresar un commit :"
 git add .
 git commit -m "%commit%"

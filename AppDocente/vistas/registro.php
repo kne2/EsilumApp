@@ -52,14 +52,6 @@
                                             <input type="password" class="form-control form-control-user" id="passwordinput2" placeholder="Repite tu contraseña" name="registerPassword2">
                                         </div>
                                     </div>
-                                    <div>
-                                        <label for="registerTipodeusuario">Tipo de usuario:</label>
-
-                                        <select name="registerTipodeusuario" id="registerTipodeusuario">
-                                            <option value="alumno">Alumno</option>
-                                            <option value="docente">Docente</option>
-                                        </select>
-                                    </div>
                                     <input class="btn btn-block btn-primary btn-user" data-pg-name="Ingresa" title="test" input type="submit" value="Registrarse">
                                     <hr>
                                 </form>

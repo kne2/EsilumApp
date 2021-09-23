@@ -1,5 +1,4 @@
-<?php
-    const APP_USUARIO = "";
+<?php 
     const IP_DB = "";
     const USUARIO_DB = "";
     const PASSWORD_DB = "";

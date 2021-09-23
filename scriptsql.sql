@@ -1,4 +1,11 @@
-use base;
+DROP DATABASE IF EXISTS test;
+CREATE DATABASE test CHARSET utf8mb4;
+use test;
+
+CREATE USER 'alumno'@'LOCALHOST' IDENTIFIED BY 'NdS[69_3xaQ2>*pA';
+CREATE USER 'docente'@'LOCALHOST' IDENTIFIED BY 'bm*2&]\Vs%E#F)jC';
+CREATE USER 'admin'@'LOCALHOST' IDENTIFIED BY '*o:VQ\\48W~w.j]R';
+
 
 create table user(
     id varchar(8) primary key,
@@ -85,3 +92,30 @@ INSERT INTO asignatura(nombreAsignatura) VALUES ("Taller1");
 INSERT INTO asignatura(nombreAsignatura) VALUES ("Taller2");
 INSERT INTO asignatura(nombreAsignatura) VALUES ("Logica");
 */
+
+/* Permisos de  alumno */
+GRANT SELECT, INSERT, UPDATE ON user TO "alumno"@"localhost";
+GRANT SELECT, INSERT, UPDATE ON consulta TO "alumno"@"localhost";
+GRANT SELECT, UPDATE ON respuesta TO "alumno"@"localhost";
+GRANT SELECT, INSERT, UPDATE ON grupo TO "alumno"@"localhost";
+GRANT SELECT, INSERT, UPDATE ON asignatura TO "alumno"@"localhost";
+GRANT SELECT, INSERT, UPDATE ON grupoTieneAsignatura TO "alumno"@"localhost";
+GRANT SELECT, INSERT, UPDATE ON alumnoAnotaGrupo TO "alumno"@"localhost";
+
+/* Permisos de  docente */
+GRANT SELECT, INSERT, UPDATE ON user TO "docente"@"localhost";
+GRANT SELECT, UPDATE ON consulta TO "docente"@"localhost";
+GRANT SELECT, INSERT, UPDATE ON respuesta TO "docente"@"localhost";
+GRANT SELECT ON grupo TO "docente"@"localhost";
+GRANT SELECT ON asignatura TO "docente"@"localhost";
+GRANT SELECT, INSERT, UPDATE ON grupoTieneAsignatura TO "docente"@"localhost";
+GRANT SELECT, INSERT, UPDATE ON alumnoAnotaGrupo TO "docente"@"localhost";
+
+/* Permisos de  admin */
+GRANT SELECT, INSERT, UPDATE, DELETE ON user TO "admin"@"localhost";
+GRANT SELECT, INSERT, UPDATE, DELETE ON consulta TO "admin"@"localhost";
+GRANT SELECT, INSERT, UPDATE, DELETE ON respuesta TO "admin"@"localhost";
+GRANT SELECT, INSERT, UPDATE, DELETE ON grupo TO "admin"@"localhost";
+GRANT SELECT, INSERT, UPDATE, DELETE ON asignatura TO "admin"@"localhost";
+GRANT SELECT, INSERT, UPDATE, DELETE ON grupoTieneAsignatura TO "admin"@"localhost";
+GRANT SELECT, INSERT, UPDATE, DELETE ON alumnoAnotaGrupo TO "admin"@"localhost";

@@ -9,6 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
+        <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico"/>
         <title>Ɛsilum</title>
         <!-- Custom fonts for this template-->
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -40,12 +41,45 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/grupos"> <i class="fas fa-users"></i> <span>Grupos</span></a>
                 </li>
+
                 <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Chat
+                </div>
+
+                <!-- Nav Item - Pages Collapse Menu -->
+                <?php foreach(AlumnoController::DevolverGruposDeAlumno() as $key => $valor) : ?>
+                    <?php if($valor): ?>   
+                        <li class="nav-item active">
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                        aria-expanded="true" aria-controls="collapseUtilities">
+                                <i class="fas fa-fw fa-folder"></i>
+                                <span><?php echo $key?></span>
+                            </a>
+                                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                        data-parent="#accordionSidebar">
+                                <div class="bg-white py-2 collapse-inner rounded">
+                                    <h6 class="collapse-header">Materias</h6>
+                                    <?php foreach(AlumnoController::DevolverMateriasPorGrupo($key) as $key => $valor) : ?>
+                                        <a class="collapse-item" href="chat<?php echo $key?>"><?php echo $key?></a>
+                                    <?php endforeach ?>
+                                </div>
+                            </div>
+                        </li>
+                    <?php endif; ?>
+                <?php endforeach ?>
+
                 <hr class="sidebar-divider d-none d-md-block">
                 <!-- Sidebar Toggler (Sidebar) -->
                 <div class="text-center d-none d-md-inline">
                     <button class="rounded-circle border-0" id="sidebarToggle"></button>
                 </div>
+                <!-- Sidebarchat start -->
+                <!-- Sidebarchat end -->
+
             </ul>
             <!-- End of Sidebar -->
             <!-- Content Wrapper -->
