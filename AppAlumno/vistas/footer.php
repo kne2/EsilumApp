@@ -23,6 +23,7 @@
         <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
         <!-- Custom scripts for all pages-->
         <script src="js/sb-admin-2.min.js"></script>
+        <script src="js/ajaxchat.js"></script>
         <!-- Page level plugins -->
     </body>
 </html>

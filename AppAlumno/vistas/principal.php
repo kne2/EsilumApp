@@ -9,7 +9,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico"/>
+        <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+        <link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16" />
         <title>Ɛsilum</title>
         <!-- Custom fonts for this template-->
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -64,14 +66,13 @@
                                 <div class="bg-white py-2 collapse-inner rounded">
                                     <h6 class="collapse-header">Materias</h6>
                                     <?php foreach(AlumnoController::DevolverMateriasPorGrupo($key) as $key => $valor) : ?>
-                                        <a class="collapse-item" href="chat<?php echo $key?>"><?php echo $key?></a>
+                                        <a class="collapse-item" href="chat<?php echo $key?>"><?php echo $key." "; echo ChatController::CheckearEstado($key) ? "OFF" : "ON"; ?> </a>
                                     <?php endforeach ?>
                                 </div>
                             </div>
                         </li>
                     <?php endif; ?>
                 <?php endforeach ?>
-
                 <hr class="sidebar-divider d-none d-md-block">
                 <!-- Sidebar Toggler (Sidebar) -->
                 <div class="text-center d-none d-md-inline">

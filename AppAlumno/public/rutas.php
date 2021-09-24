@@ -50,11 +50,33 @@
             if($_SERVER['REQUEST_METHOD'] === 'GET') UserController::MostrarRealizarConsulta(); 
             if($_SERVER['REQUEST_METHOD'] === 'POST') ConsultaController::NuevaConsulta($_POST['consultaTitulo'],$_POST['consultaDescripcion']);
             break;
+
+        case '/realizarchat':
+            if($_SERVER['REQUEST_METHOD'] === 'POST') ChatController::NuevoChat($_POST['chatAsignatura'],$_POST['chatMensaje']);
+            break;
+        
+        case '/enviarmensaje':
+            if($_SERVER['REQUEST_METHOD'] === 'POST') MensajeController::MensajeConAsignatura($_POST['chatAsignatura'],$_POST['chatMensaje']);
+            break;
+
+        case '/resolverchat':
+            if($_SERVER['REQUEST_METHOD'] === 'POST') ChatController::ResolverChat($_POST['chatAsignatura']);
+            break;
         
         default:
             switch (true){
                 case strpos($request, '/consulta') === 0:
                     ConsultaController::MostrarConsulta(ltrim($request,'/consulta'));
+                    #generarHtml("consulta",["consultaId" => ltrim($request,'/consulta')]);
+                    break;
+                
+                case strpos($request, '/chat') === 0:
+                    UserController::MostrarChat();
+                    #generarHtml("consulta",["consultaId" => ltrim($request,'/consulta')]);
+                    break;
+
+                case strpos($request, '/cargarchat') === 0:
+                    ChatController::CargarChat(ltrim($request,'/cargarchat'));
                     #generarHtml("consulta",["consultaId" => ltrim($request,'/consulta')]);
                     break;
                          
