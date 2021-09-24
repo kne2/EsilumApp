@@ -1,4 +1,5 @@
 <?php
+    const APP_USUARIO="docente";
     const APP_USUARIO = "";
     const IP_DB = "";
     const USUARIO_DB = "";
