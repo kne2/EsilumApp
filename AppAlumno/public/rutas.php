@@ -29,7 +29,7 @@
             break;
 
         case '/grupos':
-            if($_SERVER['REQUEST_METHOD'] === 'GET') UserController::MostrarGrupos();
+            if($_SERVER['REQUEST_METHOD'] === 'GET') AlumnoController::MostrarGrupos();
             if($_SERVER['REQUEST_METHOD'] === 'POST') AlumnoController::AsignarGruposAlumno($_POST);
             break;
 

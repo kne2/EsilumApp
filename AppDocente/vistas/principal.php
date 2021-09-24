@@ -34,6 +34,37 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/verconsultas"> <i class="fas fa-list"></i> <span>Ver consultas</span></a>
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/grupos"> <i class="fas fa-users"></i> <span>Grupos</span></a>
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Chat
+                </div>
+
+                <!-- Nav Item - Pages Collapse Menu --> 
+                        <li class="nav-item active">
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                        aria-expanded="true" aria-controls="collapseUtilities">
+                                <i class="fas fa-fw fa-folder"></i>
+                                <span>Materias</span>
+                            </a>
+                                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                        data-parent="#accordionSidebar">
+                                <div class="bg-white py-2 collapse-inner rounded">
+                                    <?php foreach(DocenteController::DevolverAsignaturasDocente() as $key => $valor) : ?>
+                                        <?php if($valor): ?>   
+                                            <a class="collapse-item" href="chat<?php echo $key?>"><?php echo $key." "; echo ChatController::CheckearEstado($key) ? "OFF" : "ON"; ?> </a>
+                                        <?php endif; ?>
+                                    <?php endforeach ?>
+                                </div>
+                            </div>
+                        </li>
+                
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
                 <!-- Sidebar Toggler (Sidebar) -->
