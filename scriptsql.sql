@@ -2,15 +2,10 @@ DROP DATABASE IF EXISTS test;
 CREATE DATABASE test CHARSET utf8mb4;
 use test;
 
-CREATE USER 'alumno'@'localhost' IDENTIFIED BY 'esilumapp';
-CREATE USER 'docente'@'localhost' IDENTIFIED BY 'esilumapp';
-CREATE USER 'admin'@'localhost' IDENTIFIED BY 'esilumapp';
+CREATE USER 'alumno'@'LOCALHOST' IDENTIFIED BY 'NdS[69_3xaQ2>*pA';
+CREATE USER 'docente'@'LOCALHOST' IDENTIFIED BY 'bm*2&]\Vs%E#F)jC';
+CREATE USER 'admin'@'LOCALHOST' IDENTIFIED BY '*o:VQ\\48W~w.j]R';
 
-/*
-GRANT ALL PRIVILEGES ON test.* To 'alumno'@'localhost';
-GRANT ALL PRIVILEGES ON test.* To 'docente'@'localhost';
-GRANT ALL PRIVILEGES ON test.* To 'admin'@'localhost';
-*/
 
 create table user(
     id varchar(8) primary key,
@@ -50,10 +45,10 @@ create table grupo(
 create table asignatura(
     nombreAsignatura varchar(15) PRIMARY KEY
 );
-
 create table grupoTieneAsignatura(
     nombreGrupo varchar(3),
     nombreAsignatura varchar(15),
+    userId varchar(8),
     PRIMARY KEY (nombreGrupo, nombreAsignatura)
 );
 
@@ -65,19 +60,16 @@ create table alumnoAnotaGrupo(
 
 create table docenteAnotaAsignatura(
     userId varchar(8),
+    nombreGrupo varchar(3),
+    PRIMARY KEY (userId, nombreGrupo)
+);
+
+create table chat(
+    chatId int AUTO_INCREMENT PRIMARY KEY,
+    nombreGrupo varchar(3),
     nombreAsignatura varchar(15),
-    PRIMARY KEY (userId, nombreAsignatura)
-);
-<<<<<<< HEAD
-
-create table chat(
-    chatId int AUTO_INCREMENT PRIMARY KEY,
-    userId varchar(8) NOT NULL,
-    nombreAsignatura varchar(15) NOT NULL,
     fecha DATETIME NOT NULL,
-    resuelto ENUM("false", "true") NOT NULL,
-    FOREIGN KEY (nombreAsignatura) REFERENCES asignatura(nombreAsignatura),
-    FOREIGN KEY (userId) REFERENCES user(id)
+    FOREIGN KEY (nombreGrupo, nombreAsignatura) REFERENCES grupoTieneAsignatura(nombreGrupo, nombreAsignatura)
 );
 
 create table mensaje(
@@ -98,95 +90,38 @@ create table login(
 );
 
 /* Permisos de  alumno */
-GRANT SELECT, INSERT, UPDATE ON test.user TO "alumno"@"localhost";
-GRANT SELECT, INSERT, UPDATE ON test.consulta TO "alumno"@"localhost";
-GRANT SELECT, UPDATE ON test.respuesta TO "alumno"@"localhost";
-GRANT SELECT, INSERT, UPDATE ON test.grupo TO "alumno"@"localhost";
-GRANT SELECT, INSERT, UPDATE ON test.asignatura TO "alumno"@"localhost";
-GRANT SELECT, INSERT, UPDATE ON test.grupoTieneAsignatura TO "alumno"@"localhost";
-GRANT SELECT, INSERT, UPDATE ON test.alumnoAnotaGrupo TO "alumno"@"localhost";
-GRANT SELECT, INSERT, UPDATE, DELETE ON test.mensaje TO "alumno"@"localhost";
-GRANT SELECT, INSERT, UPDATE, DELETE ON test.chat TO "alumno"@"localhost";
-GRANT SELECT, INSERT, UPDATE, DELETE ON test.docenteAnotaAsignatura TO "alumno"@"localhost";
+GRANT SELECT, INSERT, UPDATE ON user TO "alumno"@"localhost";
+GRANT SELECT, INSERT, UPDATE ON consulta TO "alumno"@"localhost";
+GRANT SELECT, UPDATE ON respuesta TO "alumno"@"localhost";
+GRANT SELECT, INSERT, UPDATE ON grupo TO "alumno"@"localhost";
+GRANT SELECT, INSERT, UPDATE ON asignatura TO "alumno"@"localhost";
+GRANT SELECT, INSERT, UPDATE ON grupoTieneAsignatura TO "alumno"@"localhost";
+GRANT SELECT, INSERT, UPDATE ON alumnoAnotaGrupo TO "alumno"@"localhost";
 
-=======
-
-create table chat(
-    chatId int AUTO_INCREMENT PRIMARY KEY,
-    userId varchar(8) NOT NULL,
-    nombreAsignatura varchar(15) NOT NULL,
-    fecha DATETIME NOT NULL,
-    resuelto ENUM("false", "true") NOT NULL,
-    FOREIGN KEY (nombreAsignatura) REFERENCES asignatura(nombreAsignatura),
-    FOREIGN KEY (userId) REFERENCES user(id)
-);
-
-create table mensaje(
-    mensajeId int AUTO_INCREMENT PRIMARY KEY,
-    chatId int NOT NULL,
-    userId varchar(8) NOT NULL,
-    fecha DATETIME NOT NULL,
-    contenido varchar(500),
-    FOREIGN KEY (userId) REFERENCES user(id),
-    FOREIGN KEY (chatId) REFERENCES chat(chatId)
-);
-
-create table login(
-    userId varchar(8) PRIMARY KEY,
-    fechaLogIn DATETIME NOT NULL,
-    fechaLogOut DATETIME NOT NULL,
-    FOREIGN KEY (userId) REFERENCES user(id)
-);
-
-/* Permisos de  alumno */
-GRANT SELECT, INSERT, UPDATE ON test.user TO "alumno"@"localhost";
-GRANT SELECT, INSERT, UPDATE ON test.consulta TO "alumno"@"localhost";
-GRANT SELECT, UPDATE ON test.respuesta TO "alumno"@"localhost";
-GRANT SELECT, INSERT, UPDATE ON test.grupo TO "alumno"@"localhost";
-GRANT SELECT, INSERT, UPDATE ON test.asignatura TO "alumno"@"localhost";
-GRANT SELECT, INSERT, UPDATE ON test.grupoTieneAsignatura TO "alumno"@"localhost";
-GRANT SELECT, INSERT, UPDATE ON test.alumnoAnotaGrupo TO "alumno"@"localhost";
-GRANT SELECT, INSERT, UPDATE, DELETE ON test.mensaje TO "alumno"@"localhost";
-GRANT SELECT, INSERT, UPDATE, DELETE ON test.chat TO "alumno"@"localhost";
-GRANT SELECT, INSERT, UPDATE, DELETE ON test.docenteAnotaAsignatura TO "alumno"@"localhost";
-
->>>>>>> 0e12289e69310f80e7e7117574e393d6fc05bb34
 /* Permisos de  docente */
-GRANT SELECT, INSERT, UPDATE ON test.user TO "docente"@"localhost";
-GRANT SELECT, UPDATE ON test.consulta TO "docente"@"localhost";
-GRANT SELECT, INSERT, UPDATE ON test.respuesta TO "docente"@"localhost";
+GRANT SELECT, INSERT, UPDATE ON user TO "docente"@"localhost";
+GRANT SELECT, UPDATE ON consulta TO "docente"@"localhost";
+GRANT SELECT, INSERT, UPDATE ON respuesta TO "docente"@"localhost";
 GRANT SELECT ON grupo TO "docente"@"localhost";
 GRANT SELECT ON asignatura TO "docente"@"localhost";
-GRANT SELECT, INSERT, UPDATE ON test.grupoTieneAsignatura TO "docente"@"localhost";
-GRANT SELECT, INSERT, UPDATE ON test.alumnoAnotaGrupo TO "docente"@"localhost";
-GRANT SELECT, INSERT, UPDATE, DELETE ON test.mensaje TO "docente"@"localhost";
-GRANT SELECT, INSERT, UPDATE, DELETE ON test.chat TO "docente"@"localhost";
-GRANT SELECT, INSERT, UPDATE, DELETE ON test.docenteAnotaAsignatura TO "docente"@"localhost";
-/* GRANT ALL PRIVILEGES ON test.* TO "docente"@"localhost" /*
+GRANT SELECT, INSERT, UPDATE ON grupoTieneAsignatura TO "docente"@"localhost";
+GRANT SELECT, INSERT, UPDATE ON alumnoAnotaGrupo TO "docente"@"localhost";
 
 /* Permisos de  admin */
-GRANT SELECT, INSERT, UPDATE, DELETE ON test.user TO "admin"@"localhost";
-GRANT SELECT, INSERT, UPDATE, DELETE ON test.consulta TO "admin"@"localhost";
-GRANT SELECT, INSERT, UPDATE, DELETE ON test.respuesta TO "admin"@"localhost";
-GRANT SELECT, INSERT, UPDATE, DELETE ON test.grupo TO "admin"@"localhost";
-GRANT SELECT, INSERT, UPDATE, DELETE ON test.asignatura TO "admin"@"localhost";
-GRANT SELECT, INSERT, UPDATE, DELETE ON test.grupoTieneAsignatura TO "admin"@"localhost";
-GRANT SELECT, INSERT, UPDATE, DELETE ON test.alumnoAnotaGrupo TO "admin"@"localhost";
-GRANT SELECT, INSERT, UPDATE, DELETE ON test.mensaje TO "admin"@"localhost";
-GRANT SELECT, INSERT, UPDATE, DELETE ON test.chat TO "admin"@"localhost";
-GRANT SELECT, INSERT, UPDATE, DELETE ON test.docenteAnotaAsignatura TO "admin"@"localhost";
+GRANT SELECT, INSERT, UPDATE, DELETE ON user TO "admin"@"localhost";
+GRANT SELECT, INSERT, UPDATE, DELETE ON consulta TO "admin"@"localhost";
+GRANT SELECT, INSERT, UPDATE, DELETE ON respuesta TO "admin"@"localhost";
+GRANT SELECT, INSERT, UPDATE, DELETE ON grupo TO "admin"@"localhost";
+GRANT SELECT, INSERT, UPDATE, DELETE ON asignatura TO "admin"@"localhost";
+GRANT SELECT, INSERT, UPDATE, DELETE ON grupoTieneAsignatura TO "admin"@"localhost";
+GRANT SELECT, INSERT, UPDATE, DELETE ON alumnoAnotaGrupo TO "admin"@"localhost";
 
-FLUSH PRIVILEGES;
 
-/*
-Datos precargados
-*/
 INSERT INTO grupo(nombreGrupo) VALUES ("1BF");
 INSERT INTO grupo(nombreGrupo) VALUES ("2BD");
 INSERT INTO grupo(nombreGrupo) VALUES ("3BB");
 INSERT INTO grupo(nombreGrupo) VALUES ("1BD");
 INSERT INTO grupo(nombreGrupo) VALUES ("2BF");
-
 INSERT INTO asignatura(nombreAsignatura) VALUES ("Programacion1");
 INSERT INTO asignatura(nombreAsignatura) VALUES ("Programacion2");
 INSERT INTO asignatura(nombreAsignatura) VALUES ("Programacion3");
@@ -214,7 +149,6 @@ INSERT INTO asignatura(nombreAsignatura) VALUES ("Geometria2");
 INSERT INTO asignatura(nombreAsignatura) VALUES ("Electronica");
 INSERT INTO asignatura(nombreAsignatura) VALUES ("Taller1");
 INSERT INTO asignatura(nombreAsignatura) VALUES ("Taller2");
-<<<<<<< HEAD
 INSERT INTO asignatura(nombreAsignatura) VALUES ("Logica");
 
 INSERT INTO grupoTieneAsignatura(nombreGrupo, nombreAsignatura) VALUES ("1BF", "Programacion1");
@@ -267,6 +201,3 @@ INSERT INTO grupoTieneAsignatura(nombreGrupo, nombreAsignatura) VALUES ("3BB", "
 INSERT INTO grupoTieneAsignatura(nombreGrupo, nombreAsignatura) VALUES ("3BB", "Proyecto");
 INSERT INTO grupoTieneAsignatura(nombreGrupo, nombreAsignatura) VALUES ("3BB", "Sociologia");
 INSERT INTO grupoTieneAsignatura(nombreGrupo, nombreAsignatura) VALUES ("3BB", "Filosofia");
-=======
-INSERT INTO asignatura(nombreAsignatura) VALUES ("Logica");
->>>>>>> 0e12289e69310f80e7e7117574e393d6fc05bb34
