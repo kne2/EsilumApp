@@ -53,6 +53,24 @@
             return $grupos;
         }
 
+        public function GetGruposAprovadosDeAlumno(){
+            $grupos = $this -> getGrupos();
+            $sql = 'SELECT nombreGrupo FROM alumnoAnotaGrupo WHERE aprovado="true" and userId = ? ORDER BY nombreGrupo';
+            $this -> sentencia = $this -> conexion -> prepare($sql);
+            $this -> sentencia -> bind_param("s", $this -> id);
+            $this -> sentencia -> execute();
+
+            $resultado = $this -> sentencia -> get_result() -> fetch_all(MYSQLI_ASSOC);
+            foreach($grupos as $key => $valor){
+                foreach($resultado as $grupoalumno){
+                    if ($key == $grupoalumno['nombreGrupo']){
+                        $grupos[$key] = True;
+                    }
+                }
+            }
+            return $grupos;
+        }
+
         private function getGrupos(){
             $grupos = array();
             $sql = "SELECT nombreGrupo FROM grupo ORDER BY nombreGrupo";
@@ -70,11 +88,13 @@
         }
 
         private function asignarGrupo($grupo){
-            $sql = "INSERT INTO alumnoAnotaGrupo(userId,nombreGrupo) VALUES (?,?)";
+            $false = "false";
+            $sql = "INSERT INTO alumnoAnotaGrupo(userId,nombreGrupo,aprovado) VALUES (?,?,?)";
             $this -> sentencia = $this -> conexion -> prepare($sql);
-            $this -> sentencia -> bind_param("ss",
+            $this -> sentencia -> bind_param("sss",
                 $this -> id,
-                $grupo
+                $grupo,
+                $false
             );
             $this -> sentencia -> execute();
         }

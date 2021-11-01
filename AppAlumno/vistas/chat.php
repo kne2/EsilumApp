@@ -1,4 +1,5 @@
 <?php require_once "principal.php"?>
+    <!-- Estilo precario afanado de internet -->
     <style>
         .center {
             /* this will keep the content center */

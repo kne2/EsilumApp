@@ -37,7 +37,7 @@
 
         public function GetMateriasDeDocente(){
             $asignaturas = $this -> getMaterias();
-            $sql = 'SELECT nombreAsignatura FROM docenteAnotaAsignatura WHERE userId = ? ORDER BY nombreAsignatura';
+            $sql = 'SELECT nombreAsignatura FROM docenteAnotaAsignatura WHERE aprovado="true" AND userId = ? ORDER BY nombreAsignatura';
             $this -> sentencia = $this -> conexion -> prepare($sql);
             $this -> sentencia -> bind_param("s", $this -> id);
             $this -> sentencia -> execute();
@@ -70,11 +70,13 @@
         }
 
         private function asignarMateria($materia){
-            $sql = "INSERT INTO docenteAnotaAsignatura(userId,nombreAsignatura) VALUES (?,?)";
+            $false = "false";
+            $sql = "INSERT INTO docenteAnotaAsignatura(userId,nombreAsignatura,aprovado) VALUES (?,?,?)";
             $this -> sentencia = $this -> conexion -> prepare($sql);
-            $this -> sentencia -> bind_param("ss",
+            $this -> sentencia -> bind_param("sss",
                 $this -> id,
-                $materia
+                $materia,
+                $false
             );
             $this -> sentencia -> execute();
         }

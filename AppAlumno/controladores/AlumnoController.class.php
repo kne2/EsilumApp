@@ -15,6 +15,12 @@
             return $a -> GetGruposDeAlumno();
         }
 
+        public static function DevolverGruposAprovadosDeAlumno(){
+            $a = new AlumnoModelo();
+            $a -> id = $_SESSION['usuarioId'];
+            return $a -> GetGruposAprovadosDeAlumno();
+        }
+
         public static function DevolverMateriasPorGrupo($grupo){
             $a = new AlumnoModelo();
             return $a -> GetMateriasPorGrupo($grupo);

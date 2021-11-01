@@ -19,6 +19,11 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+        div.col-lg-6.d-none.d-lg-block.bg-login-image {
+            margin-top: 10px;
+        }
+    </style>
 
 </head>
 
