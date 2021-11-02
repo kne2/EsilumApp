@@ -5,8 +5,8 @@
     <div class="col-md-6">
       <h3 class="text-center display-3">Eliminar Usuario</h3>
       <form action="/eliminarusuario" method="post">
-        <input type="num" id="usuario" name="id" class="form-control " placeholder="Cedula">
-        <input type="sumbit" id="btnEliminarUsuario" class="btn btn-primary" value="Eliminar Usuario">
+        <input type="text" id="usuario" name="id" class="form-control " placeholder="Cedula" minlength="8" maxlength="8" onkeypress="return onlyNumberKey(event)">
+        <input type="submit" id="btnEliminarUsuario" class="btn btn-primary" value="Eliminar Usuario">
       </form>
     </div>
     <div class="col-md-6">
@@ -33,4 +33,14 @@
     </div>
   </div>
 </div>
+<script>
+  function onlyNumberKey(evt) {
+
+    // Only ASCII character in that range allowed
+    var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+    if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+      return false;
+    return true;
+  }
+</script>
 <?php require_once "footer.php" ?>

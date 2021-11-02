@@ -70,6 +70,10 @@
             if($_SERVER['REQUEST_METHOD'] === 'POST') ChatController::ResolverChat($_POST['chatAsignatura']);
             break;
 
+        case '/eliminarusuario':
+            if($_SERVER['REQUEST_METHOD'] === 'POST') AdminController::EliminarUsuario($_POST['id']);
+            break;
+
         default:
             switch (true){
                 case strpos($request, '/consulta') === 0:

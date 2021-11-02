@@ -68,6 +68,12 @@
             return;
         }
 
+        public static function EliminarUsuario($id){
+            $a = new AdminModelo();
+            $a -> DenegarUsuario($id);
+            header("Location: /listarusuarios");
+            return;
+        }
 
         public static function DevolverMaterias(){
             $a = new AdminModelo();
