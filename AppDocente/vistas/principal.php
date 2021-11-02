@@ -11,7 +11,6 @@
         <meta name="author" content="">
         <title>Ɛsilum</title>
         <!-- Custom fonts for this template-->
-        <script src="js/theme.js"></script>
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
         <!-- Custom styles for this template-->
@@ -67,10 +66,10 @@
                             </a>
                                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                         data-parent="#accordionSidebar">
-                                <div class="bg-white py-2 collapse-inner rounded">
+                                <div class="py-2 collapse-inner rounded">
                                     <?php foreach(DocenteController::DevolverAsignaturasDocente() as $key => $valor) : ?>
                                         <?php if($valor): ?>   
-                                            <a class="collapse-item" href="chat<?php echo $key?>"><?php echo $key." "; echo ChatController::CheckearEstado($key) ? "OFF" : "ON"; ?> </a>
+                                            <a class="collapse-item" href="chat<?php echo $key?>"><?php echo $key." "; echo ChatController::CheckearEstado($key) ? '<i style="float: right">🔴 </i>' : '<i style="float: right">🟢</i>'; ?> </a>
                                         <?php endif; ?>
                                     <?php endforeach ?>
                                 </div>

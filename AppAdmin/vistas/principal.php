@@ -16,7 +16,7 @@
         <!-- Custom styles for this template-->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
     </head>
-    <body id="page-top">
+    <body id="page-top" class="dark">
         <!-- Page Wrapper -->
         <div id="wrapper">
             <!-- Sidebar -->
@@ -46,16 +46,16 @@
                     <a class="nav-link" href="/verconsultas"> <i class="fas fa-list"></i> <span>Ver consultas</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/listadodeusuario"> <i class="fas fa-user-check"></i> <span>Listado de Usuarios</span></a>
+                    <a class="nav-link" href="/listarusuarios"> <i class="fas fa-user-check"></i> <span>Listado de Usuarios</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/aprovarusuario"> <i class="fas fa-user-check"></i> <span>Aprovar usuarios</span></a>
+                    <a class="nav-link" href="/usuariospendientes"> <i class="fas fa-user-check"></i> <span>Aprovar usuarios</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/aprovargrupos"> <i class="fas fa-user-check"></i> <span>Aprovar Grupos</span></a>
+                    <a class="nav-link" href="/grupospendientes"> <i class="fas fa-user-check"></i> <span>Aprovar Grupos</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/aprovarasignaturas"> <i class="fas fa-user-check"></i> <span>Aprovar Asignaturas</span></a>
+                    <a class="nav-link" href="/asignaturaspendientes"> <i class="fas fa-user-check"></i> <span>Aprovar Asignaturas</span></a>
                 </li>
 
                 <!-- Divider -->
@@ -75,11 +75,9 @@
                             </a>
                                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                         data-parent="#accordionSidebar">
-                                <div class="bg-white py-2 collapse-inner rounded">
+                                <div class="py-2 collapse-inner rounded">
                                     <?php foreach(AdminController::DevolverMaterias() as $key => $valor) : ?>
-                                        <?php if($valor): ?>   
-                                            <a class="collapse-item" href="chat<?php echo $key?>"><?php echo $key." "; echo ChatController::CheckearEstado($key) ? "OFF" : "ON"; ?> </a>
-                                        <?php endif; ?>
+                                            <a class="collapse-item" href="chat<?php echo $key?>"><?php echo $key." "; echo ChatController::CheckearEstado($key) ? '<i style="float: right">🔴 </i>' : '<i style="float: right">🟢</i>'; ?> </a>
                                     <?php endforeach ?>
                                 </div>
                             </div>

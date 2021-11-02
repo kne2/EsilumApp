@@ -26,9 +26,67 @@
             return generarHtml('grupos',['grupos' => AlumnoController::DevolverGruposDeAlumno()]);
         }
 
+        public static function AprovarMateria($id,$materia){
+            $a = new AdminModelo();
+            $a -> AprovarAsignaturaDocente($id,$materia);
+            header("Location: /asignaturaspendientes");
+            return;
+        }
+
+        public static function AprovarGrupo($id,$grupo){
+            $a = new AdminModelo();
+            $a -> AprovarGrupoAlumno($id,$grupo);
+            header("Location: /grupospendientes");
+            return;
+        }
+
+        public static function AprovarUsuario($id){
+            $a = new AdminModelo();
+            $a -> AprovarUsuario($id);
+            header("Location: /usuariospendientes");
+            return;
+        }
+
+        public static function DenegarMateria($id,$materia){
+            $a = new AdminModelo();
+            $a -> DenegarAsignaturaDocente($id,$materia);
+            header("Location: /asignaturaspendientes");
+            return;
+        }
+
+        public static function DenegarGrupo($id,$grupo){
+            $a = new AdminModelo();
+            $a -> DenegarGrupoAlumno($id,$grupo);
+            header("Location: /grupospendientes");
+            return;
+        }
+
+        public static function DenegarUsuario($id){
+            $a = new AdminModelo();
+            $a -> DenegarUsuario($id);
+            header("Location: /usuariospendientes");
+            return;
+        }
+
+
         public static function DevolverMaterias(){
             $a = new AdminModelo();
             return $a -> getMaterias();
+        }
+
+        public static function DevolverGruposNoAprovados(){
+            $a = new AdminModelo();
+            return $a -> GruposNoAprovados();
+        }
+
+        public static function DevolverAsignaturasNoAprovadas(){
+            $a = new AdminModelo();
+            return $a -> AsignaturasNoAprovadas();
+        }
+
+        public static function DevolverUsuariosNoAprovados(){
+            $a = new AdminModelo();
+            return $a -> UsuariosNoAprovados();
         }
 
         public static function DevolverListaDeUsuarios(){

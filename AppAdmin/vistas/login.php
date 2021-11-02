@@ -42,7 +42,7 @@
                                             <h1 class="h4 text-gray-900 mb-4">Bienvenido</h1><br>
                                         </div>
                                         <?php if(isset($parametros['falla']) && $parametros['falla'] == true): ?>
-                                             <div style="color: #FF0000"> Login Incorrecto</div>
+                                            <div style="color: #FF0000"> Login Incorrecto</div>
                                         <?php endif; ?>
                                         <form action="/login" method="post">
                                             <div class="form-group">

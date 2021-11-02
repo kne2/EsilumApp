@@ -32,6 +32,22 @@
         case '/verconsultas':
             ConsultaController::ObtenerConsultas();
             break;
+        
+        case '/listarusuarios':
+            UserController::MostrarListaUsuarios();
+            break;
+
+        case '/usuariospendientes':
+            UserController::MostrarAprovarUsuarios();
+            break;
+
+        case '/grupospendientes':
+            UserController::MostrarAprovarGrupo();
+            break;
+
+        case '/asignaturaspendientes':
+            UserController::MostrarAprovarAsignatura();
+            break;
 
         case '/cerrarsesion':
             UserController::cerrarSesion();
@@ -68,12 +84,34 @@
                 
                 case strpos($request, '/chat') === 0:
                     UserController::MostrarChat();
-                    #generarHtml("consulta",["consultaId" => ltrim($request,'/consulta')]);
                     break;
 
                 case strpos($request, '/cargarchat') === 0:
                     ChatController::CargarChat(ltrim($request,'/cargarchat'));
-                    #generarHtml("consulta",["consultaId" => ltrim($request,'/consulta')]);
+                    break;
+
+                case strpos($request, '/aprovargrupo') === 0:
+                    AdminController::AprovarGrupo(explode(".",ltrim($request,'/aprovargrupo'))[0],explode(".",ltrim($request,'/aprovargrupo'))[1]);
+                    break;
+
+                case strpos($request, '/denegargrupo') === 0:
+                    AdminController::DenegarGrupo(explode(".",ltrim($request,'/denegargrupo'))[0],explode(".",ltrim($request,'/denegargrupo'))[1]);
+                    break;
+
+                case strpos($request, '/aprovarasignatura') === 0:
+                    AdminController::AprovarMateria(explode(".",ltrim($request,'/aprovarasignatura'))[0],explode(".",ltrim($request,'/aprovarasignatura'))[1]);
+                    break;
+
+                case strpos($request, '/denegarasignatura') === 0:
+                    AdminController::DenegarMateria(explode(".",ltrim($request,'/denegarasignatura'))[0],explode(".",ltrim($request,'/denegarasignatura'))[1]);
+                    break;
+
+                case strpos($request, '/aprovarusuario') === 0:
+                    AdminController::AprovarUsuario(ltrim($request,'/aprovarusuario'));
+                    break;
+
+                case strpos($request, '/denegarusuario') === 0:
+                    AdminController::Denegarusuario(ltrim($request,'/denegarusuario'));
                     break;
             
                 default:

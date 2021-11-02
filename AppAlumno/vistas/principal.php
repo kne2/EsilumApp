@@ -79,7 +79,7 @@
                                 <div class="py-2 collapse-inner rounded">
                                     <h6 class="collapse-header">Materias</h6>
                                     <?php foreach(AlumnoController::DevolverMateriasPorGrupo($key) as $key => $valor) : ?>
-                                        <a class="collapse-item" href="chat<?php echo $key?>"><?php echo $key." "; echo ChatController::CheckearEstado($key) ? "OFF" : "ON"; ?> </a>
+                                        <a class="collapse-item" href="chat<?php echo $key?>"><?php echo $key." "; echo ChatController::CheckearEstado($key) ? '<i style="float: right">🔴 </i>' : '<i style="float: right">🟢</i>'; ?> </a>
                                     <?php endforeach ?>
                                 </div>
                             </div>
