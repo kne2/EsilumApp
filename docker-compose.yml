@@ -8,9 +8,6 @@ services:
     restart: unless-stopped
     ports:
       - "8080:80"
-    volumes:
-      - ./AppAlumno/:/var/www/html
-      - ./AppAlumno/EsilumBackEnd/:/var/www/html/EsilumBackEnd/
       
   phpdocente:
     build:
@@ -20,9 +17,6 @@ services:
     restart: unless-stopped
     ports:
       - "8081:80"
-    volumes:
-      - ./AppDocente/:/var/www/html
-      - ./AppDocente/EsilumBackEnd/:/var/www/html/EsilumBackEnd/
 
   phpadmin:
     build:
@@ -32,9 +26,6 @@ services:
     restart: unless-stopped
     ports:
       - "8082:80"
-    volumes:
-      - ./AppAdmin/:/var/www/html
-      - ./AppAdmin/EsilumBackEnd/:/var/www/html/EsilumBackEnd/
       
   mysql:
     image: mysql:5.7

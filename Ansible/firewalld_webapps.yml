@@ -1,0 +1,16 @@
+- name: Abrir puertos de webapps y ssh en firewalld
+  firewalld:
+    port: "{{ item }}"
+    permanent: yes
+    state: enabled
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+  loop:
+    - 8080/tcp
+    - 8081/tcp
+    - 8082/tcp
+    - 2244/tcp
+    
+- name: recargarfirewall
+      systemd:
+        name: firewalld
+        state: reloaded
