@@ -1,6 +1,7 @@
 <?php 
-    const IP_DB = "";
-    const USUARIO_DB = "";
-    const PASSWORD_DB = "";
-    const NOMBRE_DB = "";
-    const PUERTO_DB = "";
+    const APP_USUARIO="admin";
+    const IP_DB="192.168.5.50";
+    const USUARIO_DB="pablo.delpuerto";
+    const PASSWORD_DB="58473770";
+    const NOMBRE_DB="esilum";
+    const PUERTO_DB="3306";
