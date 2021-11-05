@@ -1,0 +1,55 @@
+---
+- name: Configurar SSH en centos
+  hosts: all
+  vars:
+    ssh_port: 2244
+    rsa_key: PublicKeyAca
+  tasks:
+    - name: Crear usuario de administrador
+      user:
+        name: admin
+        password: 1234
+        state: present
+        shell: /bin/bash
+        system: no
+        createhome: yes
+        home: /home/admin
+
+    - name: ssh-key para administrador
+      authorized_key:
+        user: administrador
+        state: present
+        key: "{{rsa_key}}"
+        
+    - name: Deshabilitar selinux
+      selinux: state=disabled
+
+    - name: Deshabilitar login de root remoto
+      ansible.builtin.lineinfile: path=/etc/ssh/sshd_config
+        regexp='#PermitRootLogin'
+        line="PermitRootLogin no"
+        state=present
+      notify:
+        - restart sshd
+
+    - name: Deshabilitar Autenticacion por contraseña
+      ansible.builtin.lineinfile: path=/etc/ssh/sshd_config
+        regexp='#PasswordAuthentication'
+        line="PasswordAuthentication no"
+        state=present
+      notify:
+        - restart sshd
+
+    - name: Cambiar puerto de SSH
+      ansible.builtin.lineinfile: path=/etc/ssh/sshd_config
+        regexp='#Port'
+        line="Port {{ ssh_port }}"
+        state=present
+      notify:
+        - restart sshd
+
+  handlers:
+    - name: restart sshd
+      ansible.builtin.service:
+        name: sshd
+        state: restarted

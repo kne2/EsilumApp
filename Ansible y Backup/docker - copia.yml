@@ -1,0 +1,24 @@
+---
+- name: Instalador de docker
+  hosts: all
+  tasks:
+    
+    - name: Instalar dependencias
+      yum:
+       name: "{{item}}"
+       state: latest
+      loop:
+       - yum-utils
+       - device-mapper-persistent-data
+       - lvm2
+
+    - name: Añadir repo de docker
+      get_url:
+       url: https://download.docker.com/linux/centos/docker-ce.repo
+       dest: /etc/yum.repos.d/docker-ce.repo
+
+    - name: yum install docker pero en ansible
+      yum: name=docker state=latest
+
+    - name: systemctl start/enable docker pero en ansible
+      service: name=docker state=started enabled=yes
