@@ -1,0 +1,39 @@
+name: Actions
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+
+  CheckSyntax:
+    runs-on: [self-hosted]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Checkear sintaxis de modelo
+        run: for archivo in $(find . | grep php); do  php -l $archivo || exit 1; done
+
+  CheckVarDump:
+    runs-on: [self-hosted]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Checkear si hay var_dump
+        run: for archivo in $(find . | grep php); do  grep -q var_dump $archivo && exit 1 || true; done
+
+      - name: Checkear si hay print_r
+        run: for archivo in $(find . | grep php); do  grep -q print_r $archivo && exit 1 || true; done
+        
+  # RunUnitTests:
+  #   runs-on: [self-hosted]
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Instalar PHPUnit con Composer
+  #       run: composer install
+      
+  #     - name: Ejecutar pruebas unitarias
+  #       run: for archivo in $(find ./Test/ | grep Test.php); do ./vendor/bin/phpunit $archivo || exit 1; done
+        
