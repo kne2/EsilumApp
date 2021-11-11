@@ -1,4 +1,4 @@
-name: Actions
+name: EjemploActions
 
 on:
   push:
@@ -14,15 +14,15 @@ jobs:
     runs-on: [self-hosted]
     steps:
       - uses: actions/checkout@v2
-      - name: Checkear sintaxis de modelo
-        run: clone
+      - name: Clona el backend de la app, lo copia a cada una de las apps y borra el dir principal
+        run: git clone https://kne2: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@github.com/kne2/EsilumBackEnd  && cp -R EsilumBackEnd AppAlumno/ && cp -R EsilumBackEnd AppAdmin/ && cp -R EsilumBackEnd AppDocente/; rm -rf EsilumBackEnd
 
   CheckSyntax:
     runs-on: [self-hosted]
     steps:
       - uses: actions/checkout@v2
       - name: Checkear sintaxis de modelo
-        run: git clone https://kne2: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@github.com/kne2/EsilumBackEnd  && cp -R EsilumBackEnd AppAlumno/ && cp -R EsilumBackEnd AppAdmin/ && cp -R EsilumBackEnd AppDocente/; rm -rf EsilumBackEnd
+        run: for archivo in $(find . | grep php); do  php -l $archivo || exit 1; done
 
   CheckVarDump:
     runs-on: [self-hosted]
@@ -34,13 +34,13 @@ jobs:
       - name: Checkear si hay print_r
         run: for archivo in $(find . | grep php); do  grep -q print_r $archivo && exit 1 || true; done
         
-  # RunUnitTests:
-  #   runs-on: [self-hosted]
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Instalar PHPUnit con Composer
-  #       run: composer install
+  RunUnitTests:
+    runs-on: [self-hosted]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Instalar PHPUnit con Composer
+        run: composer install
       
-  #     - name: Ejecutar pruebas unitarias
-  #       run: for archivo in $(find ./Test/ | grep Test.php); do ./vendor/bin/phpunit $archivo || exit 1; done
+      - name: Ejecutar pruebas unitarias
+        run: for archivo in $(find ./Test/ | grep Test.php); do ./vendor/bin/phpunit $archivo || exit 1; done
         
