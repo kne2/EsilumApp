@@ -10,12 +10,19 @@ on:
 
 jobs:
 
+  ClonarBackend:
+    runs-on: [self-hosted]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Checkear sintaxis de modelo
+        run: clone
+
   CheckSyntax:
     runs-on: [self-hosted]
     steps:
       - uses: actions/checkout@v2
       - name: Checkear sintaxis de modelo
-        run: for archivo in $(find . | grep php); do  php -l $archivo || exit 1; done
+        run: git clone https://kne2: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@github.com/kne2/EsilumBackEnd  && cp -R EsilumBackEnd AppAlumno/ && cp -R EsilumBackEnd AppAdmin/ && cp -R EsilumBackEnd AppDocente/; rm -rf EsilumBackEnd
 
   CheckVarDump:
     runs-on: [self-hosted]
