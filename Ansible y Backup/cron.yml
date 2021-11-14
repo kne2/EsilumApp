@@ -1,0 +1,12 @@
+---
+- name: Editar el archivo crontab para realizar backup cada hora
+  hosts: all
+  vars:
+    ssh_port: 2244
+    rsa_key: PublicKeyAca
+  tasks:
+    - name: añade linea '@hourly /root/backup/logsviascp.sh' en crontab"
+      ansible.builtin.cron:
+        name: "Correr script de backup"
+        special_time: hourly
+        job: "/root/backup/logsviascp.sh"

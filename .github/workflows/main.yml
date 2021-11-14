@@ -17,6 +17,13 @@ jobs:
       - name: Clona el backend de la app, lo copia a cada una de las apps y borra el dir principal
         run: git clone https://kne2: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@github.com/kne2/EsilumBackEnd  && cp -R EsilumBackEnd AppAlumno/ && cp -R EsilumBackEnd AppAdmin/ && cp -R EsilumBackEnd AppDocente/; rm -rf EsilumBackEnd
 
+  CopiarConfig:
+    runs-on: [self-hosted]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Copiar config de cada aplicacion
+        run: cp ../configs/config.php.alumno AppAlumno/config.php; cp ../configs/config.php.docente AppDocente/config.php; cp ../configs/config.php.admin AppAdmin/config.php; 
+
   CheckSyntax:
     runs-on: [self-hosted]
     steps:
@@ -39,8 +46,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Instalar PHPUnit con Composer
-        run: composer install
-      
+        run: composer install --ignore-platform-reqs
+
       - name: Ejecutar pruebas unitarias
         run: for archivo in $(find ./Test/ | grep Test.php); do ./vendor/bin/phpunit $archivo || exit 1; done
         
